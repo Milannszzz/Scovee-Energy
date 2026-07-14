@@ -589,3 +589,89 @@ CONSOLE SIGNATURE
 console.log("%cSCOVEE ENERGY RESOURCES LTD","font-size:22px;font-weight:bold;color:#2563EB");
 
 console.log("%cWebsite Concept by Habeeb","font-size:14px;color:#64748B");
+
+/*=========================================
+ MOBILE MENU
+=========================================*/
+
+const menuToggle = document.querySelector(".menu-toggle");
+const navMenu = document.querySelector(".nav-menu");
+
+// Create overlay
+const overlay = document.createElement("div");
+overlay.className = "menu-overlay";
+document.body.appendChild(overlay);
+
+menuToggle.addEventListener("click", () => {
+
+    navMenu.classList.toggle("active");
+
+    overlay.classList.toggle("active");
+
+    document.body.classList.toggle("menu-open");
+
+    // Toggle icon
+    const icon = menuToggle.querySelector("i");
+
+    if(navMenu.classList.contains("active")){
+
+        icon.classList.remove("ri-menu-3-line");
+        icon.classList.add("ri-close-line");
+
+    }else{
+
+        icon.classList.remove("ri-close-line");
+        icon.classList.add("ri-menu-3-line");
+
+    }
+
+});
+
+/*=========================================
+ CLOSE MENU
+=========================================*/
+
+function closeMenu(){
+
+    navMenu.classList.remove("active");
+
+    overlay.classList.remove("active");
+
+    document.body.classList.remove("menu-open");
+
+    const icon = menuToggle.querySelector("i");
+
+    icon.classList.remove("ri-close-line");
+    icon.classList.add("ri-menu-3-line");
+
+}
+
+overlay.addEventListener("click", closeMenu);
+
+/*=========================================
+ CLOSE AFTER CLICKING A LINK
+=========================================*/
+
+document.querySelectorAll(".nav-menu a").forEach(link=>{
+
+    link.addEventListener("click",()=>{
+
+        closeMenu();
+
+    });
+
+});
+
+/*=========================================
+ ESC KEY SUPPORT
+=========================================*/
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+
+        closeMenu();
+
+    }
+
+});
